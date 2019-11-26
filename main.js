@@ -1,13 +1,12 @@
-
-
+//contants cant be changed when declared
 const resultEl = document.getElementById('result');
 const lengthEl = document.getElementById('length');
 const uppercaseEl = document.getElementById('uppercase');
 const lowercaseEl = document.getElementById('lowercase');
-const numberEl = document.getElementById('number');
-const symbolEl = document.getElementById('symbol');
+const numbersEl = document.getElementById('numbers');
+const symbolsEl = document.getElementById('symbols');
 const generateEl = document.getElementById('generate');
-const clipboardEl = document.getElementById('clipboard');
+const clipboard = document.getElementById('clipboard');
 
 
 
@@ -23,14 +22,15 @@ const randomFunc = {
     symbol: getRandomSymbol
 
 }
-
-clipboardEl.addEventListener('click', () => {
+//onclick will copy the random generated password in the text area
+clipboard.addEventListener('click', () => {
     const textarea = document.createElement('textarea');
     const password = resultEl.innerText;
 
     if(!password) {
         return;
     }
+    //this will not do anything if nothing is generated in the text area
     textarea.value = password;
     document.body.appendChild(textarea);
     textarea.select();
@@ -38,55 +38,47 @@ clipboardEl.addEventListener('click', () => {
     textarea.remove();
     alert('You copied the code!')
 });
-
+//check to see if there is a low,upper,number and symbol within the generated password
 generateEl.addEventListener('click' , () => {
     const length = +lengthEl.value;
     const hasLower = lowercaseEl.checked;
     const hasUpper = uppercaseEl.checked;
-    const hasNumber = numberEl.checked;
+    const hasNumber = numbersEl.checked;
     const hasSymbol = symbolsEl.checked;
 
-    resultEl.innerText = generatePassword(
-        hasLower,
-        hasUpper,
-        hasNumber,
-        hasSymbol,
-        length
-    );
+	resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+
     
 });
 
 
-
+//this will actually generate the password
 function generatePassword(lower, upper, number, symbol, length) {
 
-    let generatePassword = '';
+    let generatedPassword = '';
 
     const typesCount = lower + upper + number + symbol;
 
-    console.log('typesCount: ', typesCount);
     
-    const typeArr = [{ lower }, { upper }, { number }, { symbol }].filter
-    (
-        item => Object.values(item)[0]
-    );
+    
+    const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0]);
 
-    console.log('typesArr: ', typesArr);
-
+    
+// if nothing is checked in the generator, the password can not be generated
     if(typesCount === 0) {
         return '';
     }
-    for (let i = 0; i < length; i+= typesCount) {
-        typesArrr.forEach(type => {
+    for (let i=0; i < length; i+= typesCount) {
+        typesArr.forEach(type => {
             const funcName = Object.keys(type)[0];
             
 
-            generatePassword += randomFunc[funcName]();
+            generatedPassword += randomFunc[funcName]();
 
         });
     }
-
-    const finalPassword = generatePassword.slice(0, length);
+//the password is generated
+    const finalPassword = generatedPassword.slice(0, length);
 
     return finalPassword;
    
@@ -102,7 +94,7 @@ function getRandomUpper() {
 }
 
 function getRandomNumber() {
-    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+    return +String.fromCharCode(Math.floor(Math.random() * 10) + 48);
 }
 
 function getRandomSymbol() {
