@@ -27,7 +27,7 @@ clipboard.addEventListener('click', () => {
     const textarea = document.createElement('textarea');
     const password = resultEl.innerText;
 
-    if(!password) {
+    if (!password) {
         return;
     }
     //this will not do anything if nothing is generated in the text area
@@ -39,16 +39,16 @@ clipboard.addEventListener('click', () => {
     alert('You copied the code!')
 });
 //check to see if there is a low,upper,number and symbol within the generated password
-generateEl.addEventListener('click' , () => {
+generateEl.addEventListener('click', () => {
     const length = +lengthEl.value;
     const hasLower = lowercaseEl.checked;
     const hasUpper = uppercaseEl.checked;
     const hasNumber = numbersEl.checked;
     const hasSymbol = symbolsEl.checked;
 
-	resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+    resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
 
-    
+
 });
 
 
@@ -59,29 +59,29 @@ function generatePassword(lower, upper, number, symbol, length) {
 
     const typesCount = lower + upper + number + symbol;
 
-    
-    
+
+
     const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0]);
 
-    
-// if nothing is checked in the generator, the password can not be generated
-    if(typesCount === 0) {
+
+    // if nothing is checked in the generator, the password can not be generated
+    if (typesCount === 0) {
         return '';
     }
-    for (let i=0; i < length; i+= typesCount) {
+    for (let i = 0; i < length; i += typesCount) {
         typesArr.forEach(type => {
             const funcName = Object.keys(type)[0];
-            
+
 
             generatedPassword += randomFunc[funcName]();
 
         });
     }
-//the password is generated
+    //the password is generated
     const finalPassword = generatedPassword.slice(0, length);
-
-    return finalPassword;
    
+    return finalPassword;
+
 
 }
 
@@ -98,7 +98,7 @@ function getRandomNumber() {
 }
 
 function getRandomSymbol() {
-    const symbols = '!@#$%^&*(){}[]=<>/,.';
+    const symbols = '!@#$%^&*(){}[]=<>/,.~|_?;:-+';
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
