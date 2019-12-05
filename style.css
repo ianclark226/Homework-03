@@ -36,7 +36,7 @@ input[type=checkbox] {
     background-color: black;
     box-shadow: 0px 2px 10px rgba(255,255,255,0.2);
     padding: 20px;
-    width: 350px;
+    width: 400px;
     max-width: 100%;
 }
 
@@ -46,7 +46,7 @@ input[type=checkbox] {
     
     position: relative;
     font-size: 18px;
-    padding: 12px 10px;
+    padding: 5px 10px;
    min-height: 50px;
     width: 300px;
 
@@ -67,17 +67,33 @@ input[type=checkbox] {
     width: 40px;
 }
 
-.btn {
-    color: wheat;
-    background-color: red;
-    padding: 8px 12px;
+.cbtn {
+    
+    
+    
     cursor: pointer;
     font-size: 16px;
+    height: 40px;
+    width: 40px;
+    margin-left: 300px;
+    
+    
+}
+
+img {
+    height: 30px;
+    width: 30px;
+    margin-right: 50px;
 }
 
 .btn-large {
     display: block;
     width: 100%;
+    background-color: red;
+    height: 50px;
+    font-size: 16px;
+    color: white;
+    
 }
 
 .setting {
