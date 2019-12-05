@@ -1,1 +1,0 @@
-![](Desktop/passgen-screenshot.png)
